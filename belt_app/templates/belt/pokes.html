@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokes</title>
+</head>
+<body>
+	<div class='container1'>
+		<div>
+			<h3>Welcome, {{ user.name }}!</h3>
+			<a href ="/logout">Logout</a>
+			<p>{{ number_of_pokers }} people poked you!</p>
+		</div>
+		<div>
+			<ul>
+				{% if pokers_filtered %}
+					{% for pokers in pokers_filtered %}
+					<li>{{pokers.name}} packed you {{pokers.pokes.all|length}} times.</li>
+					{% endfor %}
+				{% endif %}
+			</ul>
+		</div>
+		<div class='container2'>
+			<h3>People you may want to poke:</h3>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Alias</th>
+					<th>Email Address</th>
+					<th>Actions</th>
+				</tr>
+				{% for poked_user in poke %}
+				<tr>
+					<td>{{ poked_user.name }}</td>
+					<td>{{ poked_user.alias }}</td>
+					<td>{{ poked_user.email }}</td>
+					<td>{{ poked_user.user_poked.all|length }}pokes</td>
+					<td>{{poked_user.id}}
+						<form action='/pokes/{{poked_user.id}}' method='post'>
+						{% csrf_token %}
+							<input type="submit" value="Poke!">
+						}
+						</form>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+</body>
+</html>

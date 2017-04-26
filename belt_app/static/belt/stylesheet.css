@@ -1,0 +1,14 @@
+body {
+	background-color: pink;
+}
+
+.half-size {
+	display: inline-block;
+	width: 48%;
+}
+
+
+ul {
+	list-style-type: none;
+	border: black solid;
+}
